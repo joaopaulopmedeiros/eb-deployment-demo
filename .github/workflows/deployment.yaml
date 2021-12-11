@@ -39,4 +39,4 @@ jobs:
           region: ${{ secrets.AWS_SECRET_REGION }}
           version_label: 1
           use_existing_version_if_available: true
-          deployment_package: deploy.zip
+          deployment_package: ../deploy.zip
