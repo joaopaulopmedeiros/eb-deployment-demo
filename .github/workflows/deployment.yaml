@@ -2,16 +2,20 @@ name: Deploy master
 on:
   push:
     branches:
-      - staging
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: Production
     steps:
-
-      - name: Checkout source code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: composer install
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: '7.3'
+      - uses: actions/checkout@v2
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Generate key
+        run: php artisan key:generate
