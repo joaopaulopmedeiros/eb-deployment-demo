@@ -38,3 +38,4 @@ jobs:
           environment_name: ${{ secrets.AWS_SECRET_ENV_NAME }}
           region: ${{ secrets.AWS_SECRET_REGION }}
           version_label: 1
+          deployment_package: deploy.zip
